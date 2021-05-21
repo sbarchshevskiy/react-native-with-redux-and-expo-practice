@@ -4,9 +4,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import LandingPage from "./components/LandingPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import * as firebase from "firebase";
+import Register from "./components/Register";
+import Login from "./components/Login";
+
 
 // require('dotenv').config()
+
+const firebase = require('firebase/app').default
+//previously
+// import * as firebase from "firebase";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBLCVKfDAhS_vWOGH4Xus6fccjOYRMu0Wg",
@@ -20,10 +27,9 @@ const firebaseConfig = {
 console.log('api key:' , firebaseConfig.apiKey)
 
 
-if (firebase.apps.length === 0){
+if (!firebase.apps.length){
   firebase.initializeApp(firebaseConfig)
 }
-
 
 
 const Stack = createStackNavigator();
@@ -36,6 +42,16 @@ export default function App() {
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

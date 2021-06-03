@@ -10,6 +10,7 @@ export default function fetchUser() {
       .get()
       .then((captureDb) => {
         if (captureDb.exists) {
+          console.log('capture', captureDb.data())
           dispatch({
             type: USER_STATE_CHANGE,
             currentUser: captureDb.data()})

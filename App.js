@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import MainPage, {Main} from './components/Main'
 import { Provider } from "react";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from './redux/reducers';
@@ -107,15 +108,13 @@ export default class App extends Component{
           </Stack.Navigator>
         </NavigationContainer>
       );
-
     }
 
     return(
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <Text>
-          user is logged in
-        </Text>
-      </View>
+      <Provider store={store}>
+        <MainPage />
+      </Provider>
+
     )
   }
 }

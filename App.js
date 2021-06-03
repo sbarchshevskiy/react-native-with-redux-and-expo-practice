@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
+// import * as firebase from "firebase";
 import { StyleSheet, Text, View } from 'react-native';
 import LandingPage from "./components/LandingPage";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -7,16 +8,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import MainPage, {Main} from './components/Main'
-import { Provider } from "react";
+import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from './redux/reducers';
 import thunk from 'redux-thunk';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-
-
-
-
 
 
 // require('dotenv').config()
@@ -35,10 +32,8 @@ const firebaseConfig = {
   appId: "1:462604496843:web:4cd54cbcbbbe2840b0904e"
 };
 
-console.log('api key:' , firebaseConfig.apiKey)
 
-
-if (!firebase.apps.length){
+if (firebase.apps.length === 0){
   firebase.initializeApp(firebaseConfig)
 }
 
@@ -58,11 +53,11 @@ export default class App extends Component{
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(() => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (!user){
         this.setState({
-          loaded: true,
-          loggedIn: false
+          loggedIn: false,
+          loaded: true
         })
       } else {
         this.setState({
@@ -76,7 +71,7 @@ export default class App extends Component{
 
   render(){
     const { loggedIn, loaded } = this.state;
-    if (loaded) {
+    if (!loaded) {
       return(
         <View style={{flex: 1, justifyContent: 'center'}}>
           <Text>

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import {Text, View} from "react-native";
+import firebase from "firebase";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import fetchUser from '../redux/actions/index'
+import  fetchUser  from '../redux/actions/index'
 
 export class Main extends Component {
   componentDidMount() {
@@ -10,7 +11,13 @@ export class Main extends Component {
   }
   render() {
     const  { currentUser } = this.props;
-    console.log('current user', currentUser)
+    // console.log('current user', currentUser)
+
+    if (currentUser === undefined){
+      return(
+        <View>Please Login</View>
+      )
+    }
 
     return(
       <View style={{flex: 1, justifyContent: 'center'}}>

@@ -5,7 +5,7 @@ import { USER_STATE_CHANGE } from "../constants";
 export default function fetchUser() {
   return ((dispatch) => {
     firebase.firestore()
-      .collection("user")
+      .collection("users")
       .doc(firebase.auth().currentUser.uid)
       .get()
       .then((captureDb) => {

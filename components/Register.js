@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Button, TextInput } from "react-native-web";
 import firebase from "firebase";
+import firestore from "firebase";
 
 export default class Register extends Component {
 
@@ -20,10 +21,14 @@ export default class Register extends Component {
     const { email, password, name } = this.state;
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((res) => {
-        console.log('results', email, password)
-          .catch((err) => {
-            console.log(`err ${err}`)
-          })
+        firebase.firestore().collection('users')
+          .doc(firebase.auth().currentUser.uid)
+          .set({name, email});
+        console.log('registered')
+
+      })
+      .catch((err) => {
+        console.log(`err ${err}`)
       })
 
   }

@@ -6,11 +6,14 @@ import { bindActionCreators } from "redux";
 import   fetchUser   from '../redux/actions/index'
 
 import ArticlesView from './homeComponents/Articles'
-//1,36,40
+import UploadAnImage from './homeComponents/UploadAnImage'
+import UserProfile from './homeComponents/UserProfile'
+
 
 //https://reactnavigation.org/docs/bottom-tab-navigator/
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Articles from "./homeComponents/Articles";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 const Tab = createBottomTabNavigator();
 
 export class Main extends Component {
@@ -20,8 +23,36 @@ export class Main extends Component {
   render() {
     return(
       <Tab.Navigator>
-        <Tab.Screen name="Articles" component={ArticlesView} />
-
+        <Tab.Screen name="Articles" component={ArticlesView}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="home"
+              color={color}
+              size={30}/>
+          ),
+        }}
+        />
+        <Tab.Screen name="Upload" component={UploadAnImage}
+                    options={{
+                      tabBarIcon: ({color, size}) => (
+                        <MaterialCommunityIcons
+                          name="plus-box"
+                          color={color}
+                          size={30}/>
+                      ),
+                    }}
+        />
+        <Tab.Screen name="Profile" component={UserProfile}
+                    options={{
+                      tabBarIcon: ({color, size}) => (
+                        <MaterialCommunityIcons
+                          name="account-circle"
+                          color={color}
+                          size={30}/>
+                      ),
+                    }}
+        />
       </Tab.Navigator>
       )
     }

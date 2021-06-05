@@ -3,30 +3,29 @@ import {Text, View} from "react-native";
 import firebase from "firebase";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import  fetchUser  from '../redux/actions/index'
+import   fetchUser   from '../redux/actions/index'
+
+import ArticlesView from './homeComponents/Articles'
+//1,36,40
+
+//https://reactnavigation.org/docs/bottom-tab-navigator/
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Articles from "./homeComponents/Articles";
+const Tab = createBottomTabNavigator();
 
 export class Main extends Component {
   componentDidMount() {
     this.props.fetchUser();
   }
   render() {
-    const  { currentUser } = this.props;
-    // console.log('current user', currentUser)
+    return(
+      <Tab.Navigator>
+        <Tab.Screen name="Articles" component={ArticlesView} />
 
-    if (currentUser === undefined){
-      return(
-        <View>Please Login</View>
+      </Tab.Navigator>
       )
     }
 
-    return(
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <Text>
-          { currentUser.name } is logged in
-        </Text>
-      </View>
-    )
-  }
 }
 
 const mapStateToProps = (store) => ({

@@ -13,6 +13,10 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from './redux/reducers';
 import thunk from 'redux-thunk';
 
+import MainScreen from './components/Main'
+
+
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 
@@ -107,7 +111,15 @@ export default class App extends Component{
 
     return(
       <Provider store={store}>
-        <MainPage />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Main">
+            <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }}/>
+          </Stack.Navigator>
+
+        </NavigationContainer>
+
+
+
       </Provider>
 
     )

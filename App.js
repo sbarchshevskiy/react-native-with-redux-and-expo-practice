@@ -14,6 +14,7 @@ import rootReducer from './redux/reducers';
 import thunk from 'redux-thunk';
 
 import MainScreen from './components/Main'
+import UploadAnImage from './components/homeComponents/UploadAnImage';
 
 
 
@@ -114,6 +115,7 @@ export default class App extends Component{
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }}/>
+            <Stack.Screen name="UploadAnImage" component={UploadAnImage} />
           </Stack.Navigator>
 
         </NavigationContainer>

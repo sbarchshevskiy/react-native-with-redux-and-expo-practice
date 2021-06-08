@@ -6,9 +6,12 @@ import { bindActionCreators } from "redux";
 import   fetchUser   from '../redux/actions/index'
 
 import ArticlesView from './homeComponents/Articles'
-import UploadAnImage from './homeComponents/UploadAnImage'
 import UserProfile from './homeComponents/UserProfile'
 
+
+const NullComponent = () => {
+  return null;
+}
 
 //https://reactnavigation.org/docs/bottom-tab-navigator/
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -33,7 +36,13 @@ export class Main extends Component {
           ),
         }}
         />
-        <Tab.Screen name="Upload" component={UploadAnImage}
+        <Tab.Screen name="UploadContainer" component={NullComponent}
+                    listeners={({ nav }) => ({
+                      onPress: event => {
+                        event.preventDefault()
+                        nav.navigate("UploadAnImage")
+                      }
+                    })}
                     options={{
                       tabBarIcon: ({color, size}) => (
                         <MaterialCommunityIcons
